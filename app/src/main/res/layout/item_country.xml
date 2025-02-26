@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- ImageView pour le drapeau du pays -->
+    <ImageView
+        android:id="@+id/countryFlag"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/country_flag"
+        android:scaleType="centerCrop"
+        android:src="@drawable/flag_france" />
+
+    <!-- TextView pour le nom du pays -->
+    <TextView
+        android:id="@+id/countryName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/teal_200"
+        android:text="Country Name"
+        android:gravity="center_vertical" />
+
+    <!-- Icône de flèche pour indiquer la navigation -->
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_arrow_forward"
+        android:contentDescription="@string/arrow_icon" />
+
+</LinearLayout>

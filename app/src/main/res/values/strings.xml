@@ -1,0 +1,6 @@
+<resources>
+        <string name="app_name">CountryListApp</string>
+        <string name="country_flag">Drapeau du pays</string>
+        <string name="arrow_icon">Icône de flèche</string>
+        <string name="jawg_access_token">nwRdMetWlqLP7AP88WgB1FW8y788LK9I5scpCVJ0laQPe9IrjvC2GBtFXPeahge5</string>
+        </resources>

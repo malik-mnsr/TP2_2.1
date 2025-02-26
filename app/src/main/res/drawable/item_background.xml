@@ -1,0 +1,7 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Effet de clic (pressé) -->
+    <item android:drawable="@color/kobicha" android:state_pressed="true" />
+    <!-- Effet de sélection (facultatif) -->
+    <item android:drawable="@color/kobicha" android:state_selected="true" />
+    <!-- Couleur par défaut -->
+</selector>
