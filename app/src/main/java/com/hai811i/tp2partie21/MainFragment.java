@@ -1,18 +1,14 @@
 package com.hai811i.tp2partie21;
 
-import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
-import java.util.List;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +16,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
 
+
+public class MainFragment extends Fragment {
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
 
 
         List<Country> countries = new ArrayList<>();
@@ -37,30 +36,39 @@ public class MainActivity extends AppCompatActivity {
         countries.add(new Country("Japan", R.drawable.flag_japan, "Tokyo", 126000000, 35.6762, 139.6503, "Le Japon est un pays d'Asie de l'Est, réputé pour sa technologie avancée, sa culture unique et ses paysages magnifiques."));
 
 
-
         Collections.sort(countries);
 
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                DividerItemDecoration.VERTICAL);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-
         CountryAdapter adapter = new CountryAdapter(countries, country -> {
-            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-            intent.putExtra("country_name", country.getName());
-            intent.putExtra("country_flag", country.getFlagResId());
-            intent.putExtra("country_capital", country.getCapital());
-            intent.putExtra("country_description",country.getDescription());
-            intent.putExtra("country_population", country.getPopulation());
-            intent.putExtra("country_latitude", country.getLatitude());
-            intent.putExtra("country_longitude", country.getLongitude());
-            startActivity(intent);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("country_name", country.getName());
+            bundle.putInt("country_flag", country.getFlagResId());
+            bundle.putString("country_capital", country.getCapital());
+            bundle.putString("country_description", country.getDescription());
+            bundle.putLong("country_population", country.getPopulation());
+            bundle.putDouble("country_latitude", country.getLatitude());
+            bundle.putDouble("country_longitude", country.getLongitude());
+
+
+            DetailFragment detailFragment = new DetailFragment();
+            detailFragment.setArguments(bundle);
+
+
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, detailFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
 
         recyclerView.setAdapter(adapter);
+
+        return view;
     }
 }

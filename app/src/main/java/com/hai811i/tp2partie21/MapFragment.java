@@ -1,62 +1,57 @@
 package com.hai811i.tp2partie21;
-import android.app.Activity;
-import android.content.Intent;
+
+
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import org.maplibre.android.MapLibre;
-import org.maplibre.android.annotations.MarkerOptions;
+import org.maplibre.android.maps.MapView;
+import org.maplibre.android.maps.MapLibreMap;
+import org.maplibre.android.maps.OnMapReadyCallback;
+import org.maplibre.android.maps.Style;
+import org.maplibre.android.geometry.LatLng;
 import org.maplibre.android.camera.CameraUpdateFactory;
-import org.maplibre.android.maps.MapView;
-import org.maplibre.android.maps.MapLibreMap;
-import org.maplibre.android.maps.OnMapReadyCallback;
-import org.maplibre.android.maps.Style;
-import org.maplibre.android.geometry.LatLng;
+import org.maplibre.android.annotations.MarkerOptions;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import androidx.annotation.NonNull;
-import org.maplibre.android.MapLibre;
-import org.maplibre.android.maps.MapView;
-import org.maplibre.android.maps.MapLibreMap;
-import org.maplibre.android.maps.OnMapReadyCallback;
-import org.maplibre.android.maps.Style;
-import org.maplibre.android.geometry.LatLng;
-
-
-public class MapActivity extends Activity implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private MapView mapView;
     private double latitude;
     private double longitude;
-    private static final String TAG = "MapActivity";
+    private static final String TAG = "MapFragment";
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        MapLibre.getInstance(requireContext());
 
 
-        MapLibre.getInstance(this);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
 
 
-        setContentView(R.layout.activity_map);
-
-
-        Intent intent = getIntent();
-        latitude = intent.getDoubleExtra("latitude", 0.0);
-        longitude = intent.getDoubleExtra("longitude", 0.0);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            latitude = bundle.getDouble("latitude", 0.0);
+            longitude = bundle.getDouble("longitude", 0.0);
+        }
 
 
         Log.d(TAG, "Received coordinates: Latitude = " + latitude + ", Longitude = " + longitude);
 
 
-        mapView = findViewById(R.id.mapView);
+        mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
 
         mapView.getMapAsync(this);
+
+        return view;
     }
 
     @Override
@@ -65,7 +60,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback {
 
 
         String accessToken = getString(R.string.jawg_access_token);
-        String styleUrl = "https://api.jawg.io/styles/jawg-streets.json?access-token=" + accessToken;
+        String styleUrl = "https://api.jawg.io/styles/jawg-lagoon.json?access-token=" + accessToken;
 
         mapLibreMap.setStyle(styleUrl, new Style.OnStyleLoaded() {
             @Override
@@ -76,8 +71,9 @@ public class MapActivity extends Activity implements OnMapReadyCallback {
                 LatLng latLng = new LatLng(latitude, longitude);
 
 
-                mapLibreMap.addMarker(new MarkerOptions().position(latLng).title("Location"));
-                // Centrer la carte sur la position
+                mapLibreMap.addMarker(new MarkerOptions().position(latLng).setTitle("Location"));
+
+
                 mapLibreMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
                 mapLibreMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5f), 2000);
             }
@@ -86,37 +82,37 @@ public class MapActivity extends Activity implements OnMapReadyCallback {
 
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         mapView.onStart();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         mapView.onResume();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mapView.onPause();
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         mapView.onStop();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         mapView.onDestroy();
     }
 
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }

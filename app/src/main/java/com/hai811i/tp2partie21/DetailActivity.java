@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        // Récupérer les vues
+
         ImageView detailFlag = findViewById(R.id.detailFlag);
         TextView detailName = findViewById(R.id.detailName);
         TextView detailCapital = findViewById(R.id.detailCapital);
@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView detailDescription = findViewById(R.id.detailDescription);
         Button btnShowLocation = findViewById(R.id.btnShowLocation);
 
-        // Récupérer les données passées par MainActivity
+
         Intent intent = getIntent();
         String countryName = intent.getStringExtra("country_name");
         int countryFlag = intent.getIntExtra("country_flag", R.drawable.flag_france);
@@ -46,15 +46,15 @@ public class DetailActivity extends AppCompatActivity {
         double longitude = intent.getDoubleExtra("country_longitude", 0);
         String countryDescription = intent.getStringExtra("country_description");
 
-        // Afficher les données
+
         detailFlag.setImageResource(countryFlag);
         detailName.setText(countryName);
         detailCapital.setText("Capitale : " + countryCapital);
         detailPopulation.setText("Population : " + countryPopulation);
         detailDescription.setText(countryDescription);
-        Toast.makeText(getApplicationContext(), +longitude +"" +latitude, Toast.LENGTH_SHORT).show();
 
-        // Configurer le bouton pour afficher la localisation
+
+
         btnShowLocation.setOnClickListener(v -> {
             Intent mapIntent = new Intent(DetailActivity.this, MapActivity.class);
             mapIntent.putExtra("latitude", latitude);

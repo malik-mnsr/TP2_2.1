@@ -4,9 +4,9 @@ public class Country implements Comparable<Country> {
     private int flagResId;
     private String capital;
     private long population;
-    private double latitude; // Nouveau champ
-    private double longitude; // Nouveau champ
-    private String description; // Nouveau champ
+    private double latitude;
+    private double longitude;
+    private String description;
 
     public Country(String name, int flagResId, String capital, long population, double latitude, double longitude, String description) {
         this.name = name;

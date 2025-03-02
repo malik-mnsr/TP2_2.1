@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailActivity">
+
+    <!-- Background Image -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_fragement"
+        android:scaleType="centerCrop"/>
+
+    <!-- Foreground Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:background="@drawable/lavender_border"
+        android:backgroundTint="#80361B16">
+
+        <!-- Country Flag -->
+        <ImageView
+            android:id="@+id/detailFlag"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/country_flag"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Country Name -->
+        <TextView
+            android:id="@+id/detailName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"
+            android:text="Nom du pays"/>
+
+        <!-- Country Capital -->
+        <TextView
+            android:id="@+id/detailCapital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp"
+            android:text="Capitale : Inconnue"/>
+
+        <!-- Country Population -->
+        <TextView
+            android:id="@+id/detailPopulation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp"
+            android:text="Population : Inconnue"/>
+        <!-- Ajoutez ce TextView pour la description -->
+        <TextView
+            android:id="@+id/detailDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"
+            android:text="Description du pays"/>
+
+        <!-- Ajoutez ce bouton pour afficher la localisation -->
+        <Button
+            android:id="@+id/btnShowLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voir la localisation"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/purple_500"/>
+    </LinearLayout>
+
+</FrameLayout>

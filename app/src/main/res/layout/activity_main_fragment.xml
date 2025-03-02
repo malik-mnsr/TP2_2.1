@@ -1,0 +1,26 @@
+<!-- activity_main_fragment.xml -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/ic_fragement"
+    android:layout_height="match_parent"
+    tools:context=".MainFragmentActivity">
+
+    <!-- Button to show the list of countries -->
+    <Button
+        android:id="@+id/btnShowCountries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Countries"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="16dp" />
+
+    <!-- Fragment container -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp" />
+
+</FrameLayout>
